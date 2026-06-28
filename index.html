@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Enterprise WebOS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="top-panel">
+        <div class="panel-left">
+            <span class="activities-btn" id="app-menu-trigger"><i class="fa-brands fa-linux"></i> Activities</span>
+            <span class="app-name-active">Terminal</span>
+        </div>
+        <div class="panel-center" id="system-clock">
+            Mon 00:00 AM
+        </div>
+        <div class="panel-right">
+            <div class="system-status-pill">
+                <i class="fa-solid fa-wifi"></i>
+                <i class="fa-solid fa-volume-high"></i>
+                <i class="fa-solid fa-battery-three-quarters"></i>
+                <i class="fa-solid fa-angle-down"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="desktop-environment">
+        
+        <nav class="side-dock">
+            <div class="dock-item" onclick="openApp('terminal-app')" title="Terminal Console">
+                <i class="fa-solid fa-terminal" style="color: #38bdf8;"></i>
+                <div class="dock-dot active-dot" id="dot-terminal-app"></div>
+            </div>
+            <div class="dock-item" onclick="openApp('bomber-app')" title="SMS Bomber Suite">
+                <i class="fa-solid fa-comment-sms" style="color: #fbbf24;"></i>
+                <div class="dock-dot" id="dot-bomber-app"></div>
+            </div>
+            <div class="dock-item" onclick="openApp('fb-app')" title="Facebook Audit framework">
+                <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
+                <div class="dock-dot" id="dot-fb-app"></div>
+            </div>
+            <div class="dock-item" onclick="openApp('ig-app')" title="Instagram Intelligence">
+                <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
+                <div class="dock-dot" id="dot-ig-app"></div>
+            </div>
+            <div class="dock-separator"></div>
+            <div class="dock-item" onclick="toggleSystemLogs()" title="System Information Engine">
+                <i class="fa-solid fa-circle-info" style="color: #a78bfa;"></i>
+            </div>
+        </nav>
+
+        <div class="linux-window window-focused" id="terminal-app" style="display: flex; top: 100px; left: 150px;">
+            <div class="window-topbar" onmousedown="makeDraggable(this.parentElement)">
+                <div class="window-controls">
+                    <span class="control-dot close-dot" onclick="closeApp('terminal-app')"></span>
+                    <span class="control-dot min-dot"></span>
+                    <span class="control-dot max-dot"></span>
+                </div>
+                <div class="window-title-text">root@monster-on-top: ~</div>
+            </div>
+            <div class="window-content terminal-bg" id="term-scroll-box">
+                <div class="terminal-logs" id="terminal-screen">
+                    <p class="sys-success">● Linux WebOS Kernel Loaded Successfully.</p>
+                    <p class="sys-muted">Type <span class="sys-highlight">help</span> for structural info or run actual system scripting using <span class="sys-highlight">js [code]</span></p>
+                    <br>
+                </div>
+                <div class="terminal-input-row">
+                    <span class="terminal-prompt">root@monster-on-top:~#</span>
+                    <input type="text" id="terminal-raw-input" autocomplete="off" spellcheck="false" autofocus>
+                </div>
+            </div>
+        </div>
+
+        <div class="linux-window" id="bomber-app">
+            <div class="window-topbar" onmousedown="makeDraggable(this.parentElement)">
+                <div class="window-controls">
+                    <span class="control-dot close-dot" onclick="closeApp('bomber-app')"></span>
+                    <span class="control-dot min-dot"></span>
+                    <span class="control-dot max-dot"></span>
+                </div>
+                <div class="window-title-text">sms-bomber.sh --running</div>
+            </div>
+            <div class="window-content gui-panel">
+                <div class="form-group">
+                    <label>Target MSISDN/Phone Number</label>
+                    <input type="text" placeholder="+8801XXXXXXXXX" id="bomber-target" class="linux-input">
+                </div>
+                <div class="form-group">
+                    <label>Execution Thread Boundary (Count)</label>
+                    <input type="number" placeholder="250" id="bomber-count" class="linux-input">
+                </div>
+                <button class="linux-btn btn-warning" onclick="executeBomberSimulation()">Execute Attack Vectors</button>
+                <div class="console-box" id="bomber-console">> Device pool cluster status: Idle</div>
+            </div>
+        </div>
+
+        <div class="linux-window" id="fb-app">
+            <div class="window-topbar" onmousedown="makeDraggable(this.parentElement)">
+                <div class="window-controls">
+                    <span class="control-dot close-dot" onclick="closeApp('fb-app')"></span>
+                    <span class="control-dot min-dot"></span>
+                    <span class="control-dot max-dot"></span>
+                </div>
+                <div class="window-title-text">meta-exploit-module</div>
+            </div>
+            <div class="window-content gui-panel">
+                <div class="form-group">
+                    <label>Facebook Account Node / Profile URL</label>
+                    <input type="text" placeholder="https://facebook.com/username" id="fb-target" class="linux-input">
+                </div>
+                <button class="linux-btn btn-primary" onclick="executeFbSimulation()">Audit Access Layer Token</button>
+                <div class="console-box" id="fb-console">> Meta security audit suite waiting for connection token...</div>
+            </div>
+        </div>
+
+        <div class="linux-window" id="ig-app">
+            <div class="window-topbar" onmousedown="makeDraggable(this.parentElement)">
+                <div class="window-controls">
+                    <span class="control-dot close-dot" onclick="closeApp('ig-app')"></span>
+                    <span class="control-dot min-dot"></span>
+                    <span class="control-dot max-dot"></span>
+                </div>
+                <div class="window-title-text">ig-reconnaissance-service</div>
+            </div>
+            <div class="window-content gui-panel">
+                <div class="form-group">
+                    <label>Instagram Target Handle</label>
+                    <input type="text" placeholder="@username" id="ig-target" class="linux-input">
+                </div>
+                <button class="linux-btn btn-danger" onclick="executeIgSimulation()">Extract Graph Metadata</button>
+                <div class="console-box" id="ig-logs">> OSINT matrix online... Input profile handle data.</div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
