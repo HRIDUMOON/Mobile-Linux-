@@ -1,0 +1,202 @@
+/* LINUX DISTRO UI CORE THEME SHEET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1974&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* TOP BAR (Gnome Shell Panel Styling) */
+.top-panel {
+    height: 30px;
+    background: rgba(10, 10, 12, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 13px;
+    color: #e2e8f0;
+    z-index: 10000;
+    position: relative;
+}
+
+.activities-btn {
+    font-weight: 500;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.activities-btn:hover { background: rgba(255, 255, 255, 0.15); }
+.activities-btn i { color: #f43f5e; margin-right: 4px; }
+.app-name-active { margin-left: 15px; color: #94a3b8; font-weight: 400;}
+
+.panel-center { font-weight: 500; letter-spacing: 0.3px; }
+.system-status-pill {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 12px;
+    border-radius: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+}
+.system-status-pill:hover { background: rgba(255, 255, 255, 0.18); }
+
+/* MAIN WINDOW DESKTOP WORKSPACE */
+.desktop-environment {
+    width: 100%;
+    height: calc(100vh - 30px);
+    position: relative;
+}
+
+/* SIDE LAUNCH DOCK (Ubuntu/Kali Engine style) */
+.side-dock {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 6px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    z-index: 900;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.dock-item {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.2s, transform 0.1s;
+    position: relative;
+}
+.dock-item:hover { background: rgba(255, 255, 255, 0.12); transform: scale(1.05); }
+.dock-item i { font-size: 22px; }
+
+/* Running indicator dot beneath app icon */
+.dock-dot {
+    width: 4px;
+    height: 4px;
+    background: transparent;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 2px;
+}
+.active-dot { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+.dock-separator { width: 24px; height: 1px; background: rgba(255,255,255,0.15); }
+
+/* RESPOSIVE DYNAMIC WINDOW PANELS (Glassmorphic) */
+.linux-window {
+    position: absolute;
+    width: 540px;
+    height: 360px;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    display: none; /* Active via trigger matrix */
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Window active operational context modifier */
+.window-focused {
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 20px rgba(56, 189, 248, 0.05);
+}
+
+.window-topbar {
+    height: 36px;
+    background: rgba(30, 41, 59, 0.88);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    cursor: move;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+}
+
+.window-controls { display: flex; gap: 7px; position: absolute; left: 14px; }
+.control-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; cursor: pointer;}
+.close-dot { background: #ef4444; }
+.min-dot { background: #eab308; }
+.max-dot { background: #22c55e; }
+
+.window-title-text {
+    width: 100%;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+/* INTERNAL CONTENT HOUSINGS */
+.window-content { flex: 1; padding: 18px; overflow-y: auto; color: #f8fafc; }
+.terminal-bg { background: #020617; font-family: 'Fira Code', monospace; font-size: 14px; }
+
+.terminal-logs p { margin-bottom: 5px; line-height: 1.4; white-space: pre-wrap;}
+.sys-success { color: #34d399; font-weight: bold; }
+.sys-muted { color: #64748b; }
+.sys-highlight { color: #fbbf24; }
+.sys-error { color: #f87171; }
+
+.terminal-input-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.terminal-prompt { color: #f43f5e; font-weight: bold; white-space: nowrap; }
+#terminal-raw-input {
+    background: transparent; border: none; outline: none; color: #ffffff;
+    font-family: inherit; font-size: 14px; flex: 1; caret-color: #38bdf8;
+}
+
+/* GUI MODULE PANES FORMATTING */
+.gui-panel { display: flex; flex-direction: column; gap: 14px; font-size: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { color: #94a3b8; font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;}
+
+.linux-input {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 10px; color: #fff; border-radius: 6px; outline: none;
+    transition: border 0.2s;
+}
+.linux-input:focus { border-color: #38bdf8; }
+
+.linux-btn {
+    border: none; padding: 11px; font-weight: bold; border-radius: 6px;
+    cursor: pointer; transition: background 0.2s; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;
+}
+.btn-warning { background: #fbbf24; color: #000; }
+.btn-primary { background: #1877f2; color: #fff; }
+.btn-danger { background: #e1306c; color: #fff; }
+.linux-btn:hover { filter: brightness(1.15); }
+
+.console-box {
+    background: #000000; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px; padding: 10px; height: 110px; font-family: monospace;
+    font-size: 12px; overflow-y: auto; color: #34d399; line-height: 1.5;
+}
